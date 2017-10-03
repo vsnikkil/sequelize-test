@@ -3,6 +3,8 @@ One way to use [SequelizeJS](https://github.com/sequelize/sequelize). Integrate 
 
 ## Quickstart
 ```
+ $ git clone https://github.com/vsnikkil/sequelize-test
+ $ cd sequelize-test
  $ npm install && npm start
 ```
 
