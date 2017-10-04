@@ -2,15 +2,16 @@ const Debug = require('debug')
 const info = Debug('db')
 
 const dbOpts = {
-  dialect: 'sqlite', storage: ':memory:', logging: false
+  dialect: 'sqlite', storage: ':memory:', logging: false, operatorsAliases: {}
 }
 
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize(null, null, null, dbOpts)
 const modelDescriptions = require('./models/')
+const applyModelAssociations = require('./models/modelAssociations')
 
-const Models = Object.keys(modelDescriptions)
-  .map(modelName => {
+const Models = applyModelAssociations(
+  Object.keys(modelDescriptions).map(modelName => {
     const MODEL_NAME_IDX = 0
     const modelDefinition = modelDescriptions[modelName]
 
@@ -20,6 +21,7 @@ const Models = Object.keys(modelDescriptions)
     }
   })
   .reduce((models, nextModel) => ({ ...models, ...nextModel }))
+)
 
 info('(force) syncing database')
 let dbReadyForUse = sequelize.sync({ force: true })

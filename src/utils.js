@@ -1,7 +1,7 @@
 // Just generates dummy person
 module.exports.createDummyPerson = function createDummyPerson (amount = 1) {
-  const firstNames = ['Max', 'Will', 'Jonathan', 'Chocolate', 'Igor']
-  const lastNames = ['Smith', 'Bar', 'Foo', 'Rain']
+  const firstNames = ['Donald', 'Max', 'Jon', 'Jane', 'Will', 'Jonathan', 'Chocolate', 'Igor']
+  const lastNames = ['Smith', 'Bar', 'Foo', 'Doe', 'Trump', 'Rain', 'Washington']
   const randomFromArray = arr => {
     return arr[parseInt(Math.random() * arr.length)]
   }

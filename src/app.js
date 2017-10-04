@@ -10,10 +10,16 @@ function printModel (m) {
   info(m.toJSON())
 }
 
-// Create one person to the database
-let p = db.then(() => {
-  info('creating one person to the database')
-  Person.create(createDummyPerson())
+// Create one person and one of 'something else' to the database
+// Note: using async - await syntax
+let p = db.then(async () => {
+  info('creating one person and one of \'something else\' to the database')
+  const something = await SomethingElse.create({ foo: 'fancy', bar: 'computer' })
+  const person = await Person.create(createDummyPerson())
+  
+  await person.setSomething(something)
+  const whatPersonHas = await person.getSomething()
+  info(`now person ${ person.name.bold } has a ${ whatPersonHas.foo } ${ whatPersonHas.bar }`)
 })
 
 // Bulk create demonstration
